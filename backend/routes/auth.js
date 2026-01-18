@@ -26,8 +26,8 @@ router.post('/register', async (req, res) => {
       });
     }
     
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash password with 6 rounds for faster login (still secure)
+    const hashedPassword = await bcrypt.hash(password, 6);
     
     // Insert user
     const [result] = await conn.query(

@@ -58,21 +58,37 @@ export default function Destinations() {
       ) : (
         <div className="activities-grid">
           {destinations.map((dest) => {
-            // Handle image URLs
-            const isImage = dest.image_url && (
-              dest.image_url.startsWith('http') || 
-              dest.image_url.startsWith('/uploads') || 
-              dest.image_url.includes('localhost')
-            );
-            let imageSrc = dest.image_url;
-            if (dest.image_url && dest.image_url.startsWith('/uploads')) {
-              imageSrc = `http://localhost:5000${dest.image_url}`;
+            // Handle image URLs - check both images and image_url fields
+            let imageSrc = null
+            
+            // Try to use images field first (our new data)
+            if (dest.images) {
+              if (typeof dest.images === 'string' && !dest.images.startsWith('[')) {
+                // It's a simple string path
+                imageSrc = dest.images.startsWith('http') ? dest.images : `http://localhost:5000/${dest.images}`
+              } else {
+                // Try to parse as JSON array
+                try {
+                  const parsed = JSON.parse(dest.images)
+                  if (Array.isArray(parsed) && parsed.length > 0) {
+                    imageSrc = parsed[0].startsWith('http') ? parsed[0] : `http://localhost:5000/${parsed[0]}`
+                  }
+                } catch {
+                  // Not JSON, treat as string
+                  imageSrc = dest.images.startsWith('http') ? dest.images : `http://localhost:5000/${dest.images}`
+                }
+              }
+            }
+            
+            // Fallback to image_url if images not available
+            if (!imageSrc && dest.image_url) {
+              imageSrc = dest.image_url.startsWith('http') ? dest.image_url : `http://localhost:5000${dest.image_url}`
             }
 
             return (
               <div key={dest.id} className="activity-card">
                 <div className="activity-image">
-                  {dest.image_url && isImage ? (
+                  {imageSrc ? (
                     <img src={imageSrc} alt={dest.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
                   ) : (
                     <div style={{ fontSize: '64px', textAlign: 'center', paddingTop: '50px' }}>

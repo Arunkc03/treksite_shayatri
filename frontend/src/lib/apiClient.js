@@ -292,6 +292,46 @@ export const activitiesAPI = {
   },
 };
 
+// ===== ITINERARIES API =====
+export const itinerariesAPI = {
+  // Get all itineraries with optional filters
+  getAll: async (filters = {}) => {
+    const params = new URLSearchParams(filters).toString();
+    return apiCall(`/itineraries${params ? '?' + params : ''}`);
+  },
+
+  // Get single itinerary by ID
+  getById: async (id) => {
+    return apiCall(`/itineraries/${id}`);
+  },
+
+  // Create new itinerary (admin only)
+  create: async (data) => {
+    return apiCall('/itineraries', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // Update itinerary (admin only)
+  update: async (id, data) => {
+    return apiCall(`/itineraries/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // Delete itinerary (admin only)
+  delete: async (id) => {
+    return apiCall(`/itineraries/${id}`, { method: 'DELETE' });
+  },
+
+  // Search itineraries
+  search: async (query) => {
+    return apiCall(`/itineraries/search?q=${encodeURIComponent(query)}`);
+  },
+};
+
 // ===== WEATHER API =====
 export const weatherAPI = {
   // Get weather for location (lat, lng)
@@ -384,5 +424,6 @@ export default {
   sosAPI,
   adminAPI,
   activitiesAPI,
+  itinerariesAPI,
   notificationsAPI,
 };

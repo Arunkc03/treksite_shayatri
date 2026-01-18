@@ -12,7 +12,7 @@ export default function Header() {
   function submitSearch(e){
     e.preventDefault()
     const qs = q.trim()
-    navigate(qs ? `/trails?q=${encodeURIComponent(qs)}` : '/trails')
+    navigate(qs ? `/search?q=${encodeURIComponent(qs)}` : '/search')
     setQ('')
     setOpen(false)
   }

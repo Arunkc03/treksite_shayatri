@@ -54,17 +54,35 @@ export default function DestinationDetail() {
   // Parse images and videos
   let images = []
   let videos = []
+  
+  // Handle images field
+  if (destination.images) {
+    if (typeof destination.images === 'string' && !destination.images.startsWith('[')) {
+      // It's a simple string path
+      images = [destination.images]
+    } else {
+      try {
+        images = JSON.parse(destination.images)
+      } catch {
+        // Not JSON, treat as string
+        images = [destination.images]
+      }
+    }
+  } else if (destination.image_url) {
+    images = [destination.image_url]
+  }
+  
+  // Handle videos field
   try {
-    images = destination.images ? JSON.parse(destination.images) : (destination.image_url ? [destination.image_url] : [])
     videos = destination.videos ? JSON.parse(destination.videos) : (destination.video_url ? [destination.video_url] : [])
   } catch {
-    images = destination.image_url ? [destination.image_url] : []
     videos = destination.video_url ? [destination.video_url] : []
   }
 
   const getImageUrl = (url) => {
     if (!url) return null
-    return url.startsWith('http') ? url : `http://localhost:5000${url}`
+    if (url.startsWith('http')) return url
+    return url.startsWith('/') ? `http://localhost:5000${url}` : `http://localhost:5000/${url}`
   }
 
   return (

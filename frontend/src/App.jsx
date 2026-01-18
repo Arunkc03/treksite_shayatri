@@ -21,6 +21,8 @@ import Destinations from './pages/Destinations'
 import DestinationDetail from './pages/DestinationDetail'
 import Tracking from './pages/Tracking'
 import Itineraries from './pages/Itineraries'
+import ItineraryDetail from './pages/ItineraryDetail'
+import Search from './pages/Search'
 
 export default function App() {
 
@@ -34,6 +36,7 @@ export default function App() {
       <main style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/trails" element={<Trails />} />
           <Route path="/trails/:id" element={<TrailDetail />} />
           <Route path="/climbing" element={<Climbing />} />
@@ -51,6 +54,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/itineraries" element={<Itineraries />} />
+          <Route path="/itineraries/:id" element={<ItineraryDetail />} />
           <Route path="/tracking" element={<Tracking />} />
         </Routes>
       </main>

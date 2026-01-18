@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { trailsAPI, activitiesAPI, climbingAPI, uploadAPI } from '../lib/apiClient'
 import ItinerariesSection from '../components/ItinerariesSection'
 
 export default function Admin() {
-  const { user } = useAuth()
+  const navigate = useNavigate()
+  const { user, signOut } = useAuth()
   const [activeTab, setActiveTab] = useState('dashboard') // 'dashboard', 'trails', 'activities', 'climbing', 'destinations', 'bookings', 'reviews', 'itineraries', or 'gallery'
   const [trails, setTrails] = useState([])
   const [activities, setActivities] = useState([])
@@ -56,6 +58,11 @@ export default function Admin() {
   // Check if user is admin - Verify role from database (role-based access control)
   // Temporarily allow access for testing
   const isAdmin = true // user && user.role === 'admin'
+
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/signin')
+  }
 
   useEffect(() => {
     if (!isAdmin) return
@@ -332,14 +339,28 @@ export default function Admin() {
         date: '',
       })
     } else if (activeTab === 'destinations') {
-      // Parse images if stored as JSON string
+      // Parse images if stored as JSON string or direct path
       let images = []
       let videos = []
       try {
-        images = item.images ? JSON.parse(item.images) : (item.image_url ? [item.image_url] : [])
+        if (typeof item.images === 'string' && item.images && !item.images.startsWith('[')) {
+          images = [item.images]
+        } else if (item.images) {
+          images = JSON.parse(item.images)
+        } else if (item.image_url) {
+          images = [item.image_url]
+        }
+      } catch {
+        if (item.images && typeof item.images === 'string') {
+          images = [item.images]
+        } else if (item.image_url) {
+          images = [item.image_url]
+        }
+      }
+      
+      try {
         videos = item.videos ? JSON.parse(item.videos) : (item.video_url ? [item.video_url] : [])
       } catch {
-        images = item.image_url ? [item.image_url] : []
         videos = item.video_url ? [item.video_url] : []
       }
       
@@ -414,9 +435,29 @@ export default function Admin() {
     <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ background: 'white', padding: '24px', borderRadius: '12px', marginBottom: '24px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-          <h1 style={{ margin: 0, color: '#1e293b', fontSize: '28px', fontWeight: '700' }}>Admin Dashboard</h1>
-          <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: '14px' }}>Manage your trekking platform</p>
+        <div style={{ background: 'white', padding: '24px', borderRadius: '12px', marginBottom: '24px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <h1 style={{ margin: 0, color: '#1e293b', fontSize: '28px', fontWeight: '700' }}>Admin Dashboard</h1>
+            <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: '14px' }}>Manage your trekking platform</p>
+          </div>
+          <button
+            onClick={handleSignOut}
+            style={{
+              background: '#ef4444',
+              color: 'white',
+              border: 'none',
+              padding: '10px 24px',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.background = '#dc2626'}
+            onMouseLeave={(e) => e.target.style.background = '#ef4444'}
+          >
+            Sign Out
+          </button>
         </div>
 
         {/* Client Details Modal */}
@@ -2163,12 +2204,25 @@ export default function Admin() {
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '24px' }}>
             {destinations.map(dest => {
-              // Parse images from JSON or use single image
+              // Parse images from JSON or use single image or string path
               let images = []
               try {
-                images = dest.images ? JSON.parse(dest.images) : (dest.image_url ? [dest.image_url] : [])
+                // If images is a string path, use it directly
+                if (typeof dest.images === 'string' && dest.images && !dest.images.startsWith('[')) {
+                  images = [dest.images]
+                } else if (dest.images) {
+                  // Try to parse as JSON array
+                  images = JSON.parse(dest.images)
+                } else if (dest.image_url) {
+                  images = [dest.image_url]
+                }
               } catch {
-                images = dest.image_url ? [dest.image_url] : []
+                // If parsing fails, treat as string
+                if (dest.images && typeof dest.images === 'string') {
+                  images = [dest.images]
+                } else if (dest.image_url) {
+                  images = [dest.image_url]
+                }
               }
 
               return (

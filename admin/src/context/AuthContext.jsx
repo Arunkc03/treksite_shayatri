@@ -18,11 +18,9 @@ export function AuthProvider({ children }) {
         console.warn('Failed to parse stored user:', err);
       }
     }
-    // Add a small delay to ensure proper initialization
-    setTimeout(() => {
-      setLoading(false);
-      console.log('✅ AuthContext initialized');
-    }, 100);
+    // Immediately set loading to false
+    setLoading(false);
+    console.log('✅ AuthContext initialized');
   }, [])
 
   const signUp = async (email, password, name = email.split('@')[0]) => {

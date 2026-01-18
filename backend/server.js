@@ -68,6 +68,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/upload', require('./routes/upload'));
+app.use('/api/search', require('./routes/search'));
 app.use('/api/itineraries', require('./routes/itineraries'));
 app.use('/api', require('./routes/weather'));
 

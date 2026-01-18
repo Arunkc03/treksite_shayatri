@@ -14,17 +14,29 @@ export default function SignIn() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { data, error: err } = await signIn(email, password)
-    if (err) {
-      setError(err)
-    } else {
-      // Check if user is admin
-      if (data?.user?.role === 'admin') {
-        navigate('/dashboard')
+    
+    try {
+      const { data, error: err } = await signIn(email, password)
+      console.log('Login response:', { data, err })
+      
+      if (err) {
+        setError(err)
+      } else if (data && data.user) {
+        // Check if user is admin
+        if (data.user.role === 'admin') {
+          console.log('Admin login successful, redirecting to /dashboard')
+          navigate('/dashboard')
+        } else {
+          setError('Access denied. Admin privileges required.')
+        }
       } else {
-        setError('Access denied. Admin privileges required.')
+        setError('Login failed. Please try again.')
       }
+    } catch (error) {
+      setError('An error occurred. Please try again.')
+      console.error('Login error:', error)
     }
+    
     setLoading(false)
   }
 
