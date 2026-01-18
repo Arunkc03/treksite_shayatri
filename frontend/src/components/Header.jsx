@@ -55,6 +55,16 @@ export default function Header() {
       <div className="container header-inner">
         <h1 className="logo"><NavLink to="/">🏔️ Trek<span>Site</span></NavLink></h1>
 
+        <button
+          ref={toggleRef}
+          className="menu-toggle"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-label="Toggle navigation menu"
+        >
+          {open ? '✕' : '☰'}
+        </button>
+
         <nav
           id="primary-navigation"
           ref={navRef}
@@ -79,11 +89,11 @@ export default function Header() {
                 <NavLink to="/climbing" onClick={() => setDropdownOpen(null)}>Climbing</NavLink>
                 <NavLink to="/activities" onClick={() => setDropdownOpen(null)}>Activities</NavLink>
                 <NavLink to="/destinations" onClick={() => setDropdownOpen(null)}>Destinations</NavLink>
-                <NavLink to="/itineraries" onClick={() => setDropdownOpen(null)}>Itineraries</NavLink>
               </div>
             )}
           </div>
           
+          <NavLink to="/itineraries" className={({isActive}) => isActive ? 'active' : undefined}>Itineraries</NavLink>
           <NavLink to="/about" className={({isActive}) => isActive ? 'active' : undefined}>About</NavLink>
           <NavLink to="/contact" className={({isActive}) => isActive ? 'active' : undefined}>Contact</NavLink>
           <NavLink to="/blog" className={({isActive}) => isActive ? 'active' : undefined}>Blog</NavLink>

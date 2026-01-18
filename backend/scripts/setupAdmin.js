@@ -7,9 +7,9 @@ const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const ADMIN_EMAIL = 'akc338663@gmail.com';
-const ADMIN_PASSWORD = 'Admin@123'; // Change this after first login!
-const ADMIN_NAME = 'Admin';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@orophiletrek.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ChangeMe@123!';
+const ADMIN_NAME = process.env.ADMIN_NAME || 'Administrator';
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',

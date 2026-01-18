@@ -1,7 +1,7 @@
 {
-  "name": "gandharva-backend",
+  "name": "orophiletrek-backend",
   "version": "1.0.0",
-  "description": "Backend API for Gandharva trekking and adventure platform",
+  "description": "Backend API for Orophiletrek trekking and adventure platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,7 +15,7 @@
     "api",
     "express"
   ],
-  "author": "Gandharva Team",
+  "author": "Orophiletrek Team",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.13.2",

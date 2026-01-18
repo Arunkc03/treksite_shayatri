@@ -1,6 +1,6 @@
 @echo off
 echo ===============================================
-echo  Gandharva Trekking Platform - Start All
+echo  Orophiletrek - Start All
 echo ===============================================
 echo.
 echo This will start all three services:

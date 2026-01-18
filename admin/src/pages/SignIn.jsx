@@ -43,7 +43,7 @@ export default function SignIn() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            placeholder="admin@gandharva.com"
+            placeholder="admin@orophiletrek.com"
           />
           <label>Password</label>
           <input

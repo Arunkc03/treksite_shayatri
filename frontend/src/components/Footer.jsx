@@ -22,7 +22,7 @@ export default function Footer() {
         {/* Brand Section */}
         <div>
           <h2 style={{ color: '#000000', fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>
-            Gandharva Trekking
+            Orophiletrek
           </h2>
           <p style={{ color: '#666666', fontSize: '14px', lineHeight: '1.6', marginBottom: '16px' }}>
             Your adventure starts here. Explore beautiful mountain trails and book your next trekking experience.
@@ -66,7 +66,7 @@ export default function Footer() {
         <div>
           <h3 style={{ color: '#000000', fontSize: '16px', fontWeight: '600', marginBottom: '16px' }}>Contact</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <p style={{ color: '#333333', fontSize: '14px', margin: 0 }}>Email: info@gandharva.com</p>
+            <p style={{ color: '#333333', fontSize: '14px', margin: 0 }}>Email: info@orophiletrek.com</p>
             <p style={{ color: '#333333', fontSize: '14px', margin: 0 }}>Phone: +977-1-1234567</p>
             <p style={{ color: '#333333', fontSize: '14px', margin: 0 }}>Kathmandu, Nepal</p>
           </div>
@@ -90,7 +90,7 @@ export default function Footer() {
         textAlign: 'center'
       }}>
         <p style={{ color: '#666666', fontSize: '14px', margin: 0 }}>
-          &copy; {currentYear} Gandharva Trekking. All rights reserved.
+          &copy; {currentYear} Orophiletrek. All rights reserved.
         </p>
       </div>
     </footer>

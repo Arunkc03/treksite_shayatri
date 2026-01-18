@@ -1,4 +1,4 @@
-# Gandharva Trekking Platform
+# Orophiletrek - Trekking Platform
 
 A full-stack trekking website built with React (Vite) + Node.js (Express) + MySQL.
 
@@ -34,7 +34,7 @@ cd admin && npm run dev
 | **Backend** | http://localhost:5000 | API server |
 
 ```
-Gandharva/
+Orophiletrek/
 ├── frontend/          # React + Vite frontend application (User-facing)
 │   ├── src/          # React components and pages
 │   ├── index.html    # Entry HTML file

@@ -1,6 +1,6 @@
-# Start all Gandharva services
+# Start all Orophiletrek services
 Write-Host "===============================================" -ForegroundColor Cyan
-Write-Host " Gandharva Trekking Platform - Start All" -ForegroundColor Cyan
+Write-Host " Orophiletrek - Start All" -ForegroundColor Cyan
 Write-Host "===============================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Starting all three services:" -ForegroundColor Yellow

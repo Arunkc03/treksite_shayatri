@@ -5,6 +5,19 @@ require('dotenv').config();
 
 const app = express();
 
+// Try to connect to MongoDB (optional, for itineraries)
+try {
+  const mongoose = require('mongoose');
+  mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/trek_api', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch(err => console.warn('⚠️  MongoDB not available:', err.message));
+} catch (err) {
+  console.warn('⚠️  Mongoose not installed. MongoDB features will be disabled.');
+}
+
 // Create MySQL Connection Pool
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
@@ -55,6 +68,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/upload', require('./routes/upload'));
+app.use('/api/itineraries', require('./routes/itineraries'));
 app.use('/api', require('./routes/weather'));
 
 // Health check endpoint

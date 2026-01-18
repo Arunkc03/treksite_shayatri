@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { trailsAPI, activitiesAPI, climbingAPI, uploadAPI } from '../lib/apiClient'
+import ItinerariesSection from '../components/ItinerariesSection'
 
 export default function Admin() {
   const { user } = useAuth()
-  const [activeTab, setActiveTab] = useState('dashboard') // 'dashboard', 'trails', 'activities', 'climbing', 'destinations', 'bookings', 'reviews', or 'gallery'
+  const [activeTab, setActiveTab] = useState('dashboard') // 'dashboard', 'trails', 'activities', 'climbing', 'destinations', 'bookings', 'reviews', 'itineraries', or 'gallery'
   const [trails, setTrails] = useState([])
   const [activities, setActivities] = useState([])
   const [climbing, setClimbing] = useState([])
@@ -706,6 +707,22 @@ export default function Admin() {
             ⭐ Reviews
           </button>
           <button
+            onClick={() => { setActiveTab('itineraries'); setShowForm(false); setEditingId(null); }}
+            style={{
+              padding: '12px 24px',
+              background: activeTab === 'itineraries' ? '#3b82f6' : 'transparent',
+              color: activeTab === 'itineraries' ? '#fff' : '#64748b',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '15px',
+              fontWeight: 600,
+              transition: 'all 0.3s'
+            }}
+          >
+            🗺️ Itineraries
+          </button>
+          <button
             onClick={() => { setActiveTab('gallery'); setShowForm(false); setEditingId(null); }}
             style={{
               padding: '12px 24px',
@@ -727,9 +744,10 @@ export default function Admin() {
 
         {activeTab === 'dashboard' && renderDashboard()}
         {activeTab === 'reviews' && renderReviews()}
+        {activeTab === 'itineraries' && <ItinerariesSection activeTab={activeTab} />}
         {activeTab === 'gallery' && renderGallery()}
         
-        {activeTab !== 'dashboard' && activeTab !== 'bookings' && activeTab !== 'reviews' && activeTab !== 'gallery' && (
+        {activeTab !== 'dashboard' && activeTab !== 'bookings' && activeTab !== 'reviews' && activeTab !== 'gallery' && activeTab !== 'itineraries' && (
           <>
             {!showForm ? (
               <button onClick={() => setShowForm(true)} style={{ background: '#3b82f6', color: 'white', padding: '14px 28px', border: 'none', borderRadius: '8px', fontSize: '15px', fontWeight: 600, cursor: 'pointer', marginBottom: '24px', boxShadow: '0 2px 8px rgba(59,130,246,0.3)', transition: 'all 0.3s' }}>

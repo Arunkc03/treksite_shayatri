@@ -174,7 +174,7 @@ export default function DestinationDetail() {
         {/* CTA */}
         <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '40px', borderRadius: '16px', textAlign: 'center' }}>
           <h3 style={{ fontSize: '24px', fontWeight: 700, margin: '0 0 16px 0' }}>Ready for an Adventure?</h3>
-          <p style={{ fontSize: '16px', margin: '0 0 24px 0', opacity: 0.9 }}>Explore this amazing destination with Gandharva Trekking</p>
+          <p style={{ fontSize: '16px', margin: '0 0 24px 0', opacity: 0.9 }}>Explore this amazing destination with Orophiletrek</p>
           <button onClick={() => navigate('/contact')} style={{ background: 'white', color: '#667eea', padding: '14px 32px', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '16px', fontWeight: 700, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s' }}
             onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}

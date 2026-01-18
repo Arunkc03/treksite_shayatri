@@ -55,7 +55,7 @@ export default function RazorpayPayment({ activity, numParticipants, totalAmount
         key: 'rzp_test_1IfVUUFbuB1gWF', // Razorpay Test Key ID
         amount: Math.round(totalAmount * 100),
         currency: 'USD',
-        name: 'Gandharva Adventures',
+        name: 'Orophiletrek Adventures',
         description: `${activity.name} - ${numParticipants} participant(s)`,
         order_id: orderData.orderId,
         handler: async (response) => {

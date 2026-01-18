@@ -1,6 +1,6 @@
-# Gandharva Admin Dashboard
+# Orophiletrek Admin Dashboard
 
-Admin dashboard for managing the Gandharva Trekking Platform.
+Admin dashboard for managing the Orophiletrek Trekking Platform.
 
 ## Features
 

@@ -123,7 +123,7 @@ export default function Map({
         const res = await fetch(url, {
           headers: {
             'Accept': 'application/json',
-            'User-Agent': 'Gandharva-App/1.0 (contact: you@example.com)'
+            'User-Agent': 'Orophiletrek-App/1.0 (contact: info@orophiletrek.com)'
           }
         })
         if (!res.ok) throw new Error(`Geocoding failed (${res.status})`)
@@ -230,7 +230,7 @@ export default function Map({
       const res = await fetch(url, {
         headers: {
           'Accept': 'application/json',
-          'User-Agent': 'Gandharva-App/1.0 (contact: you@example.com)'
+          'User-Agent': 'Orophiletrek-App/1.0 (contact: info@orophiletrek.com)'
         }
       })
       if (!res.ok) throw new Error('Search failed')

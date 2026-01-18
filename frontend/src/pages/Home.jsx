@@ -14,9 +14,11 @@ export default function Home() {
       setLoading(true)
       try {
         const data = await trailsAPI.getAll()
+        console.log('✅ Trails fetched:', data)
         setTrails(data.trails || [])
       } catch (err) {
-        console.error('Failed to fetch trails:', err)
+        console.error('❌ Failed to fetch trails:', err)
+        setTrails([])
       } finally {
         setLoading(false)
       }
@@ -26,9 +28,11 @@ export default function Home() {
     const fetchActivities = async () => {
       try {
         const data = await activitiesAPI.getAll()
-        setActivities(data.activities || [])
+        console.log('✅ Activities fetched:', data)
+        setActivities(data.activities || data || [])
       } catch (err) {
-        console.error('Failed to fetch activities:', err)
+        console.error('❌ Failed to fetch activities:', err)
+        setActivities([])
       }
     }
 
@@ -37,9 +41,11 @@ export default function Home() {
       try {
         const response = await fetch('http://localhost:5000/api/destinations')
         const data = await response.json()
+        console.log('✅ Destinations fetched:', data)
         setDestinations(data || [])
       } catch (err) {
-        console.error('Failed to fetch destinations:', err)
+        console.error('❌ Failed to fetch destinations:', err)
+        setDestinations([])
       }
     }
     
@@ -53,7 +59,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-inner">
           <div className="intro" style={{ textAlign: 'center' }}>
-            <h1>Welcome to Gandharva Trekking</h1>
+            <h1>Welcome to Orophiletrek</h1>
             <p>Explore beautiful mountain trails and book your adventure today. Discover breathtaking landscapes, experience nature at its finest, and create unforgettable memories with our carefully curated trekking routes.</p>
             <a href="/trails" style={{ display: 'inline-block', padding: '14px 36px', backgroundColor: '#2d5016', color: 'white', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '16px', border: 'none', cursor: 'pointer', transition: 'background-color 0.3s' }}>Start Your Adventure</a>
           </div>

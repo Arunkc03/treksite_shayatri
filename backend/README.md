@@ -1,6 +1,6 @@
-# Gandharva Backend API
+# Orophiletrek Backend API
 
-Node.js Express API for the Gandharva trekking and adventure platform.
+Node.js Express API for the Orophiletrek trekking and adventure platform.
 
 ## 📋 Project Structure
 
@@ -87,7 +87,7 @@ Create a `.env` file in the Gdback directory:
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/gandharva
+MONGODB_URI=mongodb://localhost:27017/orophiletrek
 JWT_SECRET=your_jwt_secret_key_here_change_in_production
 CORS_ORIGIN=http://localhost:5173
 ```

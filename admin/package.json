@@ -1,7 +1,7 @@
 {
-  "name": "gandharva-admin",
+  "name": "orophiletrek-admin",
   "version": "1.0.0",
-  "description": "Admin dashboard for Gandharva Trekking Platform",
+  "description": "Admin dashboard for Orophiletrek.com Trekking Platform",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3001",

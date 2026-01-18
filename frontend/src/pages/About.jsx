@@ -5,7 +5,7 @@ export default function About(){
     <div className="page about" style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
       {/* Hero Section */}
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '48px', fontWeight: 700, color: '#1a202c', marginBottom: '20px' }}>About Gandharva Trekking</h1>
+        <h1 style={{ fontSize: '48px', fontWeight: 700, color: '#1a202c', marginBottom: '20px' }}>About Orophiletrek</h1>
         <p style={{ fontSize: '20px', color: '#4a5568', lineHeight: '1.8', maxWidth: '800px', margin: '0 auto' }}>
           Your gateway to the most breathtaking mountain trails and unforgettable trekking adventures in the Himalayas.
         </p>
@@ -17,7 +17,7 @@ export default function About(){
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
           <div>
             <p style={{ fontSize: '16px', color: '#4a5568', lineHeight: '1.8', marginBottom: '16px' }}>
-              Founded by passionate trekkers and nature enthusiasts, Gandharva Trekking was born from a deep love for the mountains and a desire to share these incredible experiences with adventurers from around the world.
+              Founded by passionate trekkers and nature enthusiasts, Orophiletrek was born from a deep love for the mountains and a desire to share these incredible experiences with adventurers from around the world.
             </p>
             <p style={{ fontSize: '16px', color: '#4a5568', lineHeight: '1.8', marginBottom: '16px' }}>
               For over a decade, we've been curating and organizing treks across Nepal's most stunning landscapes, from the iconic Everest Base Camp to hidden gems known only to local communities.
@@ -67,7 +67,7 @@ export default function About(){
 
       {/* Why Choose Us Section */}
       <section style={{ marginBottom: '60px' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 700, color: '#2d5016', marginBottom: '30px', textAlign: 'center' }}>Why Choose Gandharva Trekking?</h2>
+        <h2 style={{ fontSize: '32px', fontWeight: 700, color: '#2d5016', marginBottom: '30px', textAlign: 'center' }}>Why Choose Orophiletrek?</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
           <div style={{ padding: '24px', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
             <h3 style={{ fontSize: '20px', fontWeight: 600, color: '#1a202c', marginBottom: '12px' }}>✓ Expert Local Guides</h3>
