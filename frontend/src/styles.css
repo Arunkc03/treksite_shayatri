@@ -1617,3 +1617,455 @@ textarea { min-height: 120px; resize: vertical; }
 	.detail-row { font-size: 0.85rem; }
 }
 
+/* ===== MOBILE RESPONSIVE STYLES FOR FRONTEND ===== */
+
+/* Tablet Screens (768px and below) */
+@media (max-width: 768px) {
+	:root {
+		--space-md: 12px;
+		--space-lg: 16px;
+	}
+	
+	body {
+		font-size: 14px;
+	}
+	
+	/* Header Navigation */
+	.site-header {
+		padding: clamp(8px, 2vw, 16px) 0;
+	}
+	
+	/* Cards Grid */
+	.trails-grid, .activities-grid, .destinations-grid {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+		gap: 12px !important;
+	}
+	
+	.card {
+		padding: clamp(12px, 3vw, 16px);
+	}
+	
+	.card h3 {
+		font-size: clamp(14px, 4vw, 18px);
+	}
+	
+	/* Detail Pages */
+	.detail-container {
+		gap: 16px;
+	}
+	
+	.detail-image {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	/* Forms and Inputs */
+	input, textarea, select {
+		font-size: 16px !important;
+		padding: clamp(10px, 3vw, 12px) !important;
+		min-height: 44px;
+	}
+}
+
+/* Mobile Screens (480px and below) */
+@media (max-width: 480px) {
+	:root {
+		--space-md: 8px;
+		--space-lg: 12px;
+		--space-xl: 16px;
+	}
+	
+	html {
+		font-size: 14px;
+	}
+	
+	body {
+		font-size: 13px;
+		overflow-x: hidden;
+		padding: 0;
+		margin: 0;
+	}
+	
+	/* Touch Targets */
+	button, a.btn {
+		min-height: 44px;
+		min-width: 44px;
+		padding: 12px 16px !important;
+	}
+	
+	/* Input Focus - Prevent iOS zoom */
+	input, textarea, select {
+		font-size: 16px !important;
+		padding: 12px !important;
+		min-height: 44px;
+		-webkit-appearance: none;
+		appearance: none;
+		border-radius: 8px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
+	/* Remove input zoom on focus */
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="number"],
+	textarea {
+		font-size: 16px !important;
+	}
+	
+	/* Header */
+	.site-header {
+		padding: 12px 0;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	
+	.site-header h1 {
+		font-size: clamp(16px, 5vw, 20px);
+		margin: 0;
+	}
+	
+	.nav-links {
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	
+	.nav-links a {
+		padding: 8px 12px;
+		font-size: 12px;
+	}
+	
+	/* Page Container */
+	.page {
+		padding: 12px !important;
+		max-width: 100%;
+	}
+	
+	/* Hero Section */
+	.hero {
+		padding: 20px 12px !important;
+		min-height: auto;
+	}
+	
+	.hero h1 {
+		font-size: clamp(18px, 5vw, 24px) !important;
+		margin: 0 0 12px 0 !important;
+	}
+	
+	.hero p {
+		font-size: clamp(12px, 3vw, 14px) !important;
+	}
+	
+	/* Search Bar */
+	.search-container {
+		margin: 16px 0;
+	}
+	
+	.search-form {
+		flex-direction: column;
+		gap: 8px;
+	}
+	
+	.search-form input {
+		width: 100%;
+		margin-bottom: 8px;
+	}
+	
+	.search-btn {
+		width: 100%;
+		padding: 12px !important;
+	}
+	
+	/* Grids */
+	.trails-grid,
+	.activities-grid,
+	.destinations-grid,
+	.climbing-grid,
+	.reviews-grid {
+		grid-template-columns: 1fr !important;
+		gap: 12px !important;
+	}
+	
+	.features-list {
+		grid-template-columns: 1fr !important;
+		gap: 12px !important;
+	}
+	
+	/* Cards */
+	.card {
+		padding: 12px !important;
+		margin-bottom: 8px;
+		border-radius: 8px;
+	}
+	
+	.card h3 {
+		font-size: 14px !important;
+		margin: 0 0 8px 0 !important;
+	}
+	
+	.card p {
+		font-size: 12px !important;
+		margin: 4px 0 !important;
+	}
+	
+	.card-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		border-radius: 6px;
+		margin-bottom: 8px;
+	}
+	
+	/* Detail Pages */
+	.detail-container {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 12px;
+	}
+	
+	.detail-image {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+		border-radius: 8px;
+	}
+	
+	.detail-info {
+		padding: 12px;
+	}
+	
+	.detail-info h1 {
+		font-size: clamp(18px, 5vw, 24px) !important;
+		margin: 0 0 12px 0 !important;
+	}
+	
+	.detail-info h2 {
+		font-size: clamp(14px, 4vw, 18px) !important;
+		margin: 12px 0 8px 0 !important;
+	}
+	
+	.detail-info p {
+		font-size: 13px !important;
+		line-height: 1.5;
+		margin: 8px 0 !important;
+	}
+	
+	.detail-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin: 12px 0;
+	}
+	
+	.meta-item {
+		font-size: 12px;
+	}
+	
+	/* Itineraries List */
+	.itinerary-card {
+		padding: 12px !important;
+		margin-bottom: 12px;
+	}
+	
+	.itinerary-title {
+		font-size: 14px !important;
+	}
+	
+	.itinerary-details {
+		font-size: 12px;
+		margin: 8px 0;
+	}
+	
+	/* Reviews */
+	.review-card {
+		padding: 12px !important;
+		margin-bottom: 12px;
+	}
+	
+	.review-header {
+		margin-bottom: 8px;
+	}
+	
+	.reviewer-name {
+		font-size: 13px;
+		font-weight: 600;
+	}
+	
+	.review-rating {
+		font-size: 12px;
+	}
+	
+	.review-text {
+		font-size: 12px;
+		line-height: 1.5;
+	}
+	
+	/* Buttons */
+	button, .btn, a.button {
+		padding: 12px 16px !important;
+		font-size: 13px !important;
+		border-radius: 8px;
+		width: 100%;
+		cursor: pointer;
+		border: none;
+		transition: all 0.2s;
+	}
+	
+	.btn-secondary {
+		width: auto;
+	}
+	
+	.btn-small {
+		padding: 8px 12px !important;
+		font-size: 11px !important;
+		width: auto;
+	}
+	
+	/* Booking Form */
+	.booking-form {
+		padding: 12px;
+	}
+	
+	.form-group {
+		margin-bottom: 12px;
+	}
+	
+	.form-group label {
+		font-size: 12px;
+		display: block;
+		margin-bottom: 6px;
+		font-weight: 500;
+	}
+	
+	.form-group input,
+	.form-group select,
+	.form-group textarea {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+		font-size: 14px;
+	}
+	
+	/* Footer */
+	.site-footer {
+		padding: 24px 0 12px !important;
+		margin-top: 20px;
+	}
+	
+	.footer-inner {
+		gap: 12px !important;
+		grid-template-columns: 1fr !important;
+	}
+	
+	.footer-section {
+		padding: 12px;
+	}
+	
+	.footer-section h3 {
+		font-size: 13px !important;
+		margin: 0 0 8px 0 !important;
+	}
+	
+	.footer-nav a,
+	.footer-text {
+		font-size: 11px !important;
+		line-height: 1.6;
+	}
+	
+	/* Text Sizing */
+	h1 { font-size: clamp(18px, 5vw, 24px) !important; }
+	h2 { font-size: clamp(16px, 4vw, 20px) !important; }
+	h3 { font-size: clamp(14px, 3vw, 18px) !important; }
+	h4 { font-size: 13px !important; }
+	p { font-size: 13px !important; }
+	a { font-size: 12px; }
+	
+	/* General Spacing */
+	.content-wrapper {
+		padding: 12px;
+	}
+	
+	.section {
+		padding: 16px 12px !important;
+		margin-bottom: 12px;
+	}
+	
+	/* Lists */
+	ul, ol {
+		margin: 8px 0;
+		padding-left: 16px;
+	}
+	
+	li {
+		font-size: 12px;
+		margin-bottom: 6px;
+	}
+	
+	/* Images */
+	img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+	
+	/* Flexbox */
+	.flex-between {
+		flex-direction: column;
+		gap: 12px;
+	}
+	
+	.flex-wrap {
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	
+	/* Overflow */
+	.overflow-auto {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	
+	/* Tables */
+	table {
+		font-size: 12px;
+		width: 100%;
+	}
+	
+	table th, table td {
+		padding: 8px 4px !important;
+	}
+	
+	/* No Horizontal Scroll */
+	* {
+		max-width: 100%;
+	}
+}
+
+/* Extra Small Devices (320px and below) */
+@media (max-width: 320px) {
+	body {
+		font-size: 12px;
+	}
+	
+	h1 { font-size: 16px !important; }
+	h2 { font-size: 14px !important; }
+	h3 { font-size: 12px !important; }
+	
+	button, .btn {
+		padding: 10px 12px !important;
+		font-size: 12px !important;
+	}
+	
+	.card {
+		padding: 8px !important;
+	}
+	
+	.page {
+		padding: 8px !important;
+	}
+}
+

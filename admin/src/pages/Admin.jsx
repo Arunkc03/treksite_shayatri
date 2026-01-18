@@ -432,13 +432,29 @@ export default function Admin() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: '20px' }}>
+    <div style={{ minHeight: '100vh', background: '#f5f7fa', padding: 'clamp(12px, 3vw, 20px)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ background: 'white', padding: '24px', borderRadius: '12px', marginBottom: '24px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ 
+          background: 'white', 
+          padding: 'clamp(16px, 4vw, 24px)', 
+          borderRadius: '12px', 
+          marginBottom: 'clamp(16px, 4vw, 24px)', 
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
           <div>
-            <h1 style={{ margin: 0, color: '#1e293b', fontSize: '28px', fontWeight: '700' }}>Admin Dashboard</h1>
-            <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: '14px' }}>Manage your trekking platform</p>
+            <h1 style={{ 
+              margin: 0, 
+              color: '#1e293b', 
+              fontSize: 'clamp(20px, 5vw, 28px)', 
+              fontWeight: '700' 
+            }}>Admin Dashboard</h1>
+            <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: 'clamp(12px, 3vw, 14px)' }}>Manage your trekking platform</p>
           </div>
           <button
             onClick={handleSignOut}
@@ -446,12 +462,13 @@ export default function Admin() {
               background: '#ef4444',
               color: 'white',
               border: 'none',
-              padding: '10px 24px',
+              padding: 'clamp(8px, 2vw, 10px) clamp(16px, 4vw, 24px)',
               borderRadius: '8px',
-              fontSize: '14px',
+              fontSize: 'clamp(12px, 3vw, 14px)',
               fontWeight: '600',
               cursor: 'pointer',
-              transition: 'background 0.2s'
+              transition: 'background 0.2s',
+              whiteSpace: 'nowrap'
             }}
             onMouseEnter={(e) => e.target.style.background = '#dc2626'}
             onMouseLeave={(e) => e.target.style.background = '#ef4444'}
