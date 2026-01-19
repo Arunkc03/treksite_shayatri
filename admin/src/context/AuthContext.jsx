@@ -13,12 +13,15 @@ export function AuthProvider({ children }) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        console.log('✅ Restored user from localStorage:', parsedUser);
+        setUser(parsedUser);
       } catch (err) {
         console.warn('Failed to parse stored user:', err);
+        localStorage.removeItem('user');
       }
     }
-    // Immediately set loading to false
+    // Set loading to false after checking localStorage
     setLoading(false);
     console.log('✅ AuthContext initialized');
   }, [])
