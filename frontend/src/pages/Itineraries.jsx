@@ -76,7 +76,24 @@ export default function Itineraries() {
 
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div style={{ marginBottom: '30px' }}>
-            <div style={{ fontSize: '4rem', marginBottom: '20px' }}>{trek.image}</div>
+            <div style={{ 
+              fontSize: '4rem', 
+              marginBottom: '20px',
+              display: trek.image && trek.image.startsWith('http') ? 'none' : 'block'
+            }}>
+              {trek.image && !trek.image.startsWith('http') ? trek.image : ''}
+            </div>
+
+            {trek.image && trek.image.startsWith('http') && (
+              <div style={{ marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <img 
+                  src={trek.image} 
+                  alt={trek.title}
+                  style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
+                />
+              </div>
+            )}
+
             <h1 style={{ fontSize: '36px', fontWeight: 700, color: '#2d5016', marginBottom: '16px' }}>
               {trek.title}
             </h1>
@@ -96,7 +113,7 @@ export default function Itineraries() {
               </div>
               <div style={{ background: '#f0f9ff', padding: '16px', borderRadius: '8px' }}>
                 <p style={{ color: '#6b7280', fontSize: '12px', marginBottom: '4px' }}>Price</p>
-                <p style={{ fontSize: '18px', fontWeight: 600, color: '#d4a574' }}>₨{trek.price.toLocaleString()}</p>
+                <p style={{ fontSize: '18px', fontWeight: 600, color: '#d4a574' }}>₨{(typeof trek.price === 'string' ? parseFloat(trek.price) : trek.price).toLocaleString()}</p>
               </div>
             </div>
 
@@ -283,9 +300,28 @@ export default function Itineraries() {
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
-              <div style={{ fontSize: '3rem', padding: '24px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(45,80,22,0.1), rgba(212,165,116,0.08))' }}>
-                {trek.image}
+              <div style={{ 
+                fontSize: '3rem', 
+                padding: '24px', 
+                textAlign: 'center', 
+                background: 'linear-gradient(135deg, rgba(45,80,22,0.1), rgba(212,165,116,0.08))',
+                display: trek.image && trek.image.startsWith('http') ? 'none' : 'flex',
+                minHeight: trek.image && trek.image.startsWith('http') ? '0' : '140px',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {trek.image && !trek.image.startsWith('http') ? trek.image : ''}
               </div>
+
+              {trek.image && trek.image.startsWith('http') && (
+                <div style={{ height: '200px', overflow: 'hidden', background: '#f3f4f6' }}>
+                  <img 
+                    src={trek.image} 
+                    alt={trek.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+              )}
 
               <div style={{ padding: '20px' }}>
                 <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#1a1a1a', marginBottom: '8px' }}>
@@ -311,7 +347,7 @@ export default function Itineraries() {
                   </div>
                   <div>
                     <p style={{ color: '#9ca3af', marginBottom: '2px' }}>Price</p>
-                    <p style={{ fontWeight: '600', color: '#d4a574' }}>₨{trek.price.toLocaleString()}</p>
+                    <p style={{ fontWeight: '600', color: '#d4a574' }}>₨{(typeof trek.price === 'string' ? parseFloat(trek.price) : trek.price).toLocaleString()}</p>
                   </div>
                 </div>
 

@@ -17,13 +17,14 @@ export default function ItineraryDetail() {
         if (response.success) {
           // Convert database format to frontend format
           const data = response.itinerary
+          const priceValue = typeof data.price === 'string' ? parseFloat(data.price) : data.price
           setItinerary({
             id: data.id,
             title: data.title,
             description: data.description,
             duration: `${data.duration_days} Days`,
             difficulty: data.difficulty,
-            price: `₨${data.price.toLocaleString()}`,
+            price: `₨${priceValue.toLocaleString()}`,
             image: data.image,
             location: data.location,
             bestSeason: data.best_season,
@@ -100,7 +101,23 @@ export default function ItineraryDetail() {
         </button>
 
         <div style={{ marginBottom: '30px' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '20px' }}>{itinerary.image}</div>
+          <div style={{ 
+            fontSize: '4rem', 
+            marginBottom: '20px',
+            display: itinerary.image && itinerary.image.startsWith('http') ? 'none' : 'block'
+          }}>
+            {itinerary.image && !itinerary.image.startsWith('http') ? itinerary.image : ''}
+          </div>
+
+          {itinerary.image && itinerary.image.startsWith('http') && (
+            <div style={{ marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src={itinerary.image} 
+                alt={itinerary.title}
+                style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
+              />
+            </div>
+          )}
 
           <h1 style={{ fontSize: '36px', fontWeight: 700, color: '#2d5016', marginBottom: '16px' }}>
             {itinerary.title}

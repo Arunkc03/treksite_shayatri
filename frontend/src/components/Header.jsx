@@ -8,6 +8,7 @@ export default function Header() {
   const navigate = useNavigate()
   const navRef = useRef(null)
   const toggleRef = useRef(null)
+  const dropdownRef = useRef(null)
 
   function submitSearch(e){
     e.preventDefault()
@@ -32,11 +33,19 @@ export default function Header() {
         setDropdownOpen(null)
       }
     }
+    // Close dropdown when clicking outside
+    function onClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(null)
+      }
+    }
     document.addEventListener('keydown', onKey)
     window.addEventListener('resize', onResize)
+    document.addEventListener('click', onClickOutside)
     return () => {
       document.removeEventListener('keydown', onKey)
       window.removeEventListener('resize', onResize)
+      document.removeEventListener('click', onClickOutside)
     }
   }, [])
 
@@ -73,17 +82,18 @@ export default function Header() {
         >
           <NavLink to="/" end className={({isActive}) => isActive ? 'active' : undefined}>Home</NavLink>
           
-          <div className="nav-dropdown">
+          <div className="nav-dropdown" ref={dropdownRef}>
             <button 
               className="dropdown-toggle"
               onClick={(e) => {
                 e.preventDefault()
-                setDropdownOpen(dropdownOpen === 'explore' ? null : 'explore')
+                e.stopPropagation()
+                setDropdownOpen(dropdownOpen === 'other-activities' ? null : 'other-activities')
               }}
             >
-              Explore ▼
+              Other Activities ▼
             </button>
-            {dropdownOpen === 'explore' && (
+            {dropdownOpen === 'other-activities' && (
               <div className="dropdown-menu">
                 <NavLink to="/trails" onClick={() => setDropdownOpen(null)}>Trails</NavLink>
                 <NavLink to="/climbing" onClick={() => setDropdownOpen(null)}>Climbing</NavLink>

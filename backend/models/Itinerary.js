@@ -148,20 +148,31 @@ class Itinerary {
   static parseData(itinerary) {
     if (!itinerary) return null;
 
+    const parseField = (field) => {
+      try {
+        if (typeof field === 'string') {
+          // If it's a string, try to parse it as JSON
+          const parsed = JSON.parse(field || '[]');
+          return Array.isArray(parsed) ? parsed : [];
+        } else if (Array.isArray(field)) {
+          return field;
+        } else if (typeof field === 'object' && field !== null) {
+          return Array.isArray(field) ? field : [];
+        }
+        return [];
+      } catch (e) {
+        // If JSON parsing fails, return empty array
+        console.warn('Failed to parse field:', field, e.message);
+        return [];
+      }
+    };
+
     return {
       ...itinerary,
-      highlights: typeof itinerary.highlights === 'string' 
-        ? JSON.parse(itinerary.highlights || '[]') 
-        : itinerary.highlights || [],
-      dayByDayPlan: typeof itinerary.dayByDayPlan === 'string'
-        ? JSON.parse(itinerary.dayByDayPlan || '[]')
-        : itinerary.dayByDayPlan || [],
-      includes: typeof itinerary.includes === 'string'
-        ? JSON.parse(itinerary.includes || '[]')
-        : itinerary.includes || [],
-      excludes: typeof itinerary.excludes === 'string'
-        ? JSON.parse(itinerary.excludes || '[]')
-        : itinerary.excludes || []
+      highlights: parseField(itinerary.highlights),
+      dayByDayPlan: parseField(itinerary.dayByDayPlan),
+      includes: parseField(itinerary.includes),
+      excludes: parseField(itinerary.excludes)
     };
   }
 }

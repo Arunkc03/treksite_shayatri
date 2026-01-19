@@ -33,6 +33,8 @@ export default function ItinerariesSection({ activeTab }) {
     location: ''
   })
   const [activityInput, setActivityInput] = useState('')
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [imagePreview, setImagePreview] = useState(null)
 
   useEffect(() => {
     if (activeTab === 'itineraries') {
@@ -45,12 +47,21 @@ export default function ItinerariesSection({ activeTab }) {
     setError(null)
     try {
       const response = await fetch('http://localhost:5000/api/itineraries')
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`)
+      }
       const data = await response.json()
-      if (data.success) {
-        setItineraries(data.itineraries || [])
+      if (data.success && Array.isArray(data.itineraries)) {
+        setItineraries(data.itineraries)
+      } else if (data.success) {
+        setItineraries([])
+      } else {
+        setError(data.error || 'Failed to fetch itineraries')
       }
     } catch (err) {
-      setError(err.message)
+      console.error('Error fetching itineraries:', err)
+      setError(err.message || 'Failed to fetch itineraries')
+      setItineraries([])
     }
     setLoading(false)
   }
@@ -114,6 +125,42 @@ export default function ItinerariesSection({ activeTab }) {
     }))
   }
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingImage(true)
+    try {
+      // Show preview
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        setImagePreview(event.target.result)
+      }
+      reader.readAsDataURL(file)
+
+      // Upload file
+      const formDataUpload = new FormData()
+      formDataUpload.append('image', file)
+
+      const response = await fetch('http://localhost:5000/api/upload', {
+        method: 'POST',
+        body: formDataUpload
+      })
+
+      if (!response.ok) throw new Error('Upload failed')
+      const data = await response.json()
+      setFormData(prev => ({
+        ...prev,
+        image: data.imageUrl || data.url
+      }))
+    } catch (error) {
+      alert('Failed to upload image: ' + error.message)
+      console.error('Upload error:', error)
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
   const addDayPlan = () => {
     if (dayInput.day && dayInput.title && dayInput.description) {
       setFormData(prev => ({
@@ -149,6 +196,10 @@ export default function ItinerariesSection({ activeTab }) {
         body: JSON.stringify(formData)
       })
 
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`)
+      }
+
       const data = await response.json()
       if (data.success) {
         await fetchItineraries()
@@ -158,35 +209,40 @@ export default function ItinerariesSection({ activeTab }) {
         setError(data.error || 'Failed to save itinerary')
       }
     } catch (err) {
-      setError(err.message)
+      console.error('Error saving itinerary:', err)
+      setError(err.message || 'Failed to save itinerary')
     }
     setLoading(false)
   }
 
   const handleEdit = (itinerary) => {
     setFormData(itinerary)
-    setEditingId(itinerary._id)
+    setEditingId(itinerary.id)
     setShowForm(true)
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure?')) return
 
-    setLoading(true)
     try {
       const response = await fetch(`http://localhost:5000/api/itineraries/${id}`, {
         method: 'DELETE'
       })
+      
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`)
+      }
+      
       const data = await response.json()
       if (data.success) {
         await fetchItineraries()
       } else {
-        setError(data.error)
+        setError(data.error || 'Failed to delete itinerary')
       }
     } catch (err) {
-      setError(err.message)
+      console.error('Error deleting itinerary:', err)
+      setError(err.message || 'Failed to delete itinerary')
     }
-    setLoading(false)
   }
 
   const resetForm = () => {
@@ -212,6 +268,7 @@ export default function ItinerariesSection({ activeTab }) {
     setExcludeInput('')
     setDayInput({ day: '', title: '', description: '', activities: [], location: '' })
     setActivityInput('')
+    setImagePreview(null)
   }
 
   if (activeTab !== 'itineraries') return null
@@ -281,8 +338,38 @@ export default function ItinerariesSection({ activeTab }) {
             </div>
 
             <div className="form-group">
-              <label>Emoji/Icon</label>
-              <input type="text" name="image" value={formData.image} onChange={handleInputChange} maxLength="5" />
+              <label>Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={uploadingImage}
+              />
+              {uploadingImage && <p style={{ color: '#3465c5', fontSize: '14px', marginTop: '8px' }}>⏳ Uploading image...</p>}
+              {(imagePreview || (formData.image && formData.image.startsWith('http'))) && (
+                <div style={{ marginTop: '12px', padding: '12px', background: '#f9fafb', borderRadius: '8px', textAlign: 'center' }}>
+                  <img 
+                    src={imagePreview || formData.image} 
+                    alt="Preview" 
+                    style={{ maxWidth: '100%', maxHeight: '150px', borderRadius: '6px' }}
+                  />
+                  <p style={{ fontSize: '12px', color: '#666', marginTop: '8px' }}>✓ Image selected</p>
+                </div>
+              )}
+              <small style={{ color: '#666', display: 'block', marginTop: '4px' }}>
+                Upload a JPG, PNG, GIF, or WebP image (max 5MB)
+              </small>
+            </div>
+
+            <div className="form-group">
+              <label>Emoji/Icon (Optional)</label>
+              <input type="text" name="emoji" placeholder="🗺️" maxLength="5" onChange={(e) => {
+                const val = e.target.value
+                if (val && !val.startsWith('http')) {
+                  setFormData(prev => ({ ...prev, image: val }))
+                }
+              }} />
+              <small style={{ color: '#666', display: 'block', marginTop: '4px' }}>Use if you prefer emoji over uploaded image</small>
             </div>
 
             {/* Highlights */}
@@ -371,9 +458,20 @@ export default function ItinerariesSection({ activeTab }) {
       <div style={{ display: 'grid', gap: '16px' }}>
         {itineraries.map(itinerary => (
           <div key={itinerary._id} className="admin-table" style={{ padding: '16px', background: '#fff', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: '16px' }}>
               <div style={{ flex: 1 }}>
-                <h3>{itinerary.image} {itinerary.title}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                  {itinerary.image && itinerary.image.startsWith('http') ? (
+                    <img 
+                      src={itinerary.image} 
+                      alt={itinerary.title}
+                      style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <div style={{ fontSize: '2.5rem' }}>{itinerary.image}</div>
+                  )}
+                  <h3 style={{ margin: 0 }}>{itinerary.title}</h3>
+                </div>
                 <p style={{ color: '#6b7280', marginBottom: '8px' }}>{itinerary.description.substring(0, 100)}...</p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', fontSize: '0.9rem' }}>
                   <div><strong>Duration:</strong> {itinerary.duration_days} days</div>
@@ -391,7 +489,7 @@ export default function ItinerariesSection({ activeTab }) {
               </div>
               <div style={{ display: 'flex', gap: '8px', marginLeft: '16px' }}>
                 <button className="btn btn-sm btn-accent" onClick={() => handleEdit(itinerary)}>Edit</button>
-                <button className="btn btn-sm btn-danger" onClick={() => handleDelete(itinerary._id)}>Delete</button>
+                <button className="btn btn-sm btn-danger" onClick={() => handleDelete(itinerary.id)}>Delete</button>
               </div>
             </div>
           </div>
