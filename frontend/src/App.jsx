@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import RoutingTest from './components/RoutingTest'
 import Home from './pages/Home'
 import Trails from './pages/Trails'
 import TrailDetail from './pages/TrailDetail'
@@ -90,6 +91,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <RoutingTest />
     </div>
   )
 }
