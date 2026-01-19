@@ -1,5 +1,5 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -25,6 +25,37 @@ import ItineraryDetail from './pages/ItineraryDetail'
 import Search from './pages/Search'
 
 export default function App() {
+  const location = useLocation()
+
+  // Handle page refresh - restore scroll position and state
+  useEffect(() => {
+    // Mark that page has loaded
+    sessionStorage.setItem('app-loaded', 'true')
+    
+    // Restore scroll position if navigating back
+    const savedScrollPos = sessionStorage.getItem(`scroll-${location.pathname}`)
+    if (savedScrollPos) {
+      window.scrollTo(0, parseInt(savedScrollPos))
+    } else {
+      window.scrollTo(0, 0)
+    }
+
+    return () => {
+      // Save scroll position before leaving page
+      sessionStorage.setItem(`scroll-${location.pathname}`, window.scrollY)
+    }
+  }, [location.pathname])
+
+  // Handle beforeunload to preserve state
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      // Save current location to restore after refresh
+      sessionStorage.setItem('last-location', location.pathname)
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [location.pathname])
 
   return (
     <div style={{ 
