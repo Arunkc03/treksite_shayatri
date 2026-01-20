@@ -195,8 +195,8 @@ export default function ClimbingDetail() {
                 </div>
               )}
 
-              <div style={{ background: '#fef3c7', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #fcd34d' }}>
-                <p style={{ margin: 0, color: '#666', fontSize: '14px', marginBottom: '8px', fontWeight: 600 }}>📞 Get More Information</p>
+              <div style={{ background: '#fef3c7', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #fcd34d', minWidth: 0 }}>
+                <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '6px', fontWeight: 600, wordBreak: 'break-word' }}>📞 Contact</p>
                 <button
                   onClick={() => navigate('/contact', { state: { climbingId: spot.id, climbingName: spot.name } })}
                   style={{
@@ -204,12 +204,12 @@ export default function ClimbingDetail() {
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',
                     border: 'none',
-                    padding: '10px 14px',
+                    padding: '9px 12px',
                     borderRadius: '6px',
                     cursor: 'pointer',
-                    fontSize: '13px',
+                    fontSize: '12px',
                     fontWeight: 600,
-                    marginTop: '8px',
+                    marginTop: '6px',
                     transition: 'all 0.2s',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
