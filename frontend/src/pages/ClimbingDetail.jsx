@@ -76,14 +76,14 @@ export default function ClimbingDetail() {
     <div style={{ minHeight: '100vh', background: '#f8fafc' }}>
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '20px', position: 'relative' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', minWidth: 0, flex: '1 1 auto' }}>
-            <button onClick={() => navigate('/climbing')} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <button onClick={() => navigate('/climbing')} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               ← Back
             </button>
-            <div style={{ minWidth: 0 }}>
-              <h1 style={{ margin: '0 0 4px 0', fontSize: 'clamp(20px, 5vw, 32px)', fontWeight: 700, wordBreak: 'break-word' }}>{spot.name}</h1>
-              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>📍 {spot.location}</p>
+            <div>
+              <h1 style={{ margin: '0 0 4px 0', fontSize: '32px', fontWeight: 700 }}>{spot.name}</h1>
+              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px' }}>📍 {spot.location}</p>
             </div>
           </div>
         </div>
@@ -91,22 +91,22 @@ export default function ClimbingDetail() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         {/* Main Image */}
-        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: 'clamp(250px, 50vw, 400px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {imageSrc ? (
             <img 
               src={imageSrc} 
               alt={spot.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ width: '100%', height: '400px', objectFit: 'cover' }}
             />
           ) : (
-            <div style={{ fontSize: 'clamp(80px, 20vw, 120px)', textAlign: 'center' }}>
+            <div style={{ fontSize: '120px', textAlign: 'center' }}>
               🧗
             </div>
           )}
         </div>
 
         {/* Content Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px', '@media (max-width: 768px)': { gridTemplateColumns: '1fr', gap: '24px' } }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
           <div>
             {/* Details Section */}
             <div style={{ marginBottom: '40px' }}>
@@ -202,18 +202,21 @@ export default function ClimbingDetail() {
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',
                     border: 'none',
-                    padding: '10px 16px',
+                    padding: '10px 14px',
                     borderRadius: '6px',
                     cursor: 'pointer',
-                    fontSize: '14px',
+                    fontSize: '13px',
                     fontWeight: 600,
                     marginTop: '8px',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
                   }}
                   onMouseEnter={(e) => e.target.style.transform = 'scale(1.02)'}
                   onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                 >
-                  ✉️ Contact Us
+                  ✉️ Contact
                 </button>
               </div>
               
