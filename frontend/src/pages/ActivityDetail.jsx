@@ -172,21 +172,23 @@ export default function ActivityDetail() {
               border: '1px solid #e5e7eb',
               boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
               position: 'sticky',
-              top: '20px'
+              top: '20px',
+              maxWidth: '100%',
+              overflowX: 'hidden'
             }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '20px', fontWeight: 700, color: '#2d5016' }}>Ready to Book?</h3>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: 700, color: '#2d5016', wordBreak: 'break-word' }}>Ready to Book?</h3>
               
               {activity.price && (
-                <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '2px solid #0369a1', textAlign: 'center' }}>
-                  <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase' }}>Price per Person</p>
-                  <p style={{ margin: 0, fontSize: '28px', fontWeight: 800, color: '#2d5016' }}>₨ {parseFloat(activity.price).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '2px solid #0369a1', textAlign: 'center', minWidth: 0 }}>
+                  <p style={{ margin: 0, color: '#666', fontSize: '11px', marginBottom: '4px', fontWeight: 600, textTransform: 'uppercase' }}>Price</p>
+                  <p style={{ margin: 0, fontSize: '22px', fontWeight: 800, color: '#2d5016', wordBreak: 'break-word' }}>₨ {parseFloat(activity.price).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                 </div>
               )}
               
-              <div style={{ background: '#f0f9ff', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #e0f2fe' }}>
-                <p style={{ margin: 0, color: '#666', fontSize: '14px', marginBottom: '4px' }}>Activity Type</p>
-                <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#2d5016' }}>
-                  {activity.difficulty} Adventure
+              <div style={{ background: '#f0f9ff', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #e0f2fe', minWidth: 0 }}>
+                <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '4px', wordBreak: 'break-word' }}>Activity</p>
+                <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#2d5016', wordBreak: 'break-word' }}>
+                  {activity.difficulty}
                 </p>
               </div>
 
@@ -227,12 +229,15 @@ export default function ActivityDetail() {
                   background: '#fff',
                   color: '#2d5016',
                   border: '2px solid #2d5016',
-                  padding: '14px 20px',
+                  padding: '10px 14px',
                   borderRadius: '8px',
-                  fontSize: '16px',
+                  fontSize: '13px',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  transition: 'all 0.3s'
+                  transition: 'all 0.3s',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#f0f9ff'
@@ -241,13 +246,13 @@ export default function ActivityDetail() {
                   e.currentTarget.style.background = '#fff'
                 }}
               >
-                ← Back to Activities
+                ← Back
               </button>
 
               {/* Info Box */}
-              <div style={{ marginTop: '24px', padding: '16px', background: '#fef3c7', border: '1px solid #fcd34d', borderRadius: '8px', color: '#92400e' }}>
-                <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6' }}>
-                  💡 <strong>Tip:</strong> Contact us for group discounts and custom itineraries!
+              <div style={{ marginTop: '16px', padding: '12px', background: '#fef3c7', border: '1px solid #fcd34d', borderRadius: '8px', color: '#92400e', minWidth: 0 }}>
+                <p style={{ margin: 0, fontSize: '12px', lineHeight: '1.5', wordBreak: 'break-word' }}>
+                  💡 Group discounts available!
                 </p>
               </div>
             </div>

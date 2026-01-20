@@ -258,9 +258,11 @@ export default function TrailDetail() {
               border: '1px solid #e5e7eb',
               boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
               position: 'sticky',
-              top: '20px'
+              top: '20px',
+              maxWidth: '100%',
+              overflowX: 'hidden'
             }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '20px', fontWeight: 700, color: '#2d5016' }}>� Pricing</h3>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: 700, color: '#2d5016', wordBreak: 'break-word' }}>💰 Pricing</h3>
               
               {trail.price && (
                 <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '2px solid #0369a1', textAlign: 'center' }}>

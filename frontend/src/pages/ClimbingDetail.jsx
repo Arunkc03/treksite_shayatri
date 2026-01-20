@@ -164,31 +164,33 @@ export default function ClimbingDetail() {
               border: '1px solid #e5e7eb',
               boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
               position: 'sticky',
-              top: '20px'
+              top: '20px',
+              maxWidth: '100%',
+              overflowX: 'hidden'
             }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '20px', fontWeight: 700, color: '#2d5016' }}>Quick Info</h3>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: 700, color: '#2d5016', wordBreak: 'break-word' }}>Info</h3>
               
               {spot.price !== null && spot.price !== undefined && (
-                <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '2px solid #0369a1', textAlign: 'center' }}>
-                  <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase' }}>Price per Person</p>
-                  <p style={{ margin: 0, fontSize: '28px', fontWeight: 800, color: '#2d5016' }}>
+                <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '2px solid #0369a1', textAlign: 'center', minWidth: 0 }}>
+                  <p style={{ margin: 0, color: '#666', fontSize: '11px', marginBottom: '4px', fontWeight: 600, textTransform: 'uppercase' }}>Price</p>
+                  <p style={{ margin: 0, fontSize: '22px', fontWeight: 800, color: '#2d5016', wordBreak: 'break-word' }}>
                     ₨ {parseFloat(spot.price).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </p>
                 </div>
               )}
 
-              <div style={{ background: '#f0f9ff', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #e0f2fe' }}>
-                <p style={{ margin: 0, color: '#666', fontSize: '14px', marginBottom: '4px', fontWeight: 600 }}>⛰️ Difficulty Level</p>
-                <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#2d5016' }}>
-                  {spot.difficulty || 'Not specified'}
+              <div style={{ background: '#f0f9ff', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #e0f2fe', minWidth: 0 }}>
+                <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '4px', fontWeight: 600, wordBreak: 'break-word' }}>⛰️ Level</p>
+                <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#2d5016', wordBreak: 'break-word' }}>
+                  {spot.difficulty || 'N/A'}
                 </p>
               </div>
 
               {spot.height_meters && (
-                <div style={{ background: '#f0f9ff', padding: '16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #e0f2fe' }}>
-                  <p style={{ margin: 0, color: '#666', fontSize: '14px', marginBottom: '4px', fontWeight: 600 }}>📏 Height</p>
-                  <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#2d5016' }}>
-                    {spot.height_meters} meters
+                <div style={{ background: '#f0f9ff', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #e0f2fe', minWidth: 0 }}>
+                  <p style={{ margin: 0, color: '#666', fontSize: '12px', marginBottom: '4px', fontWeight: 600 }}>📏 Height</p>
+                  <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#2d5016' }}>
+                    {spot.height_meters}m
                   </p>
                 </div>
               )}
