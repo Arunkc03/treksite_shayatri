@@ -150,27 +150,29 @@ export default function TrailDetail() {
     <div style={{ minHeight: '100vh', background: '#f8fafc' }}>
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '20px', position: 'relative' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/trails" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', textDecoration: 'none', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', minWidth: '0', flex: '1 1 auto' }}>
+            <Link to="/trails" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', textDecoration: 'none', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
               ← Back
             </Link>
-            <div>
-              <h1 style={{ margin: '0 0 4px 0', fontSize: '32px', fontWeight: 700 }}>{trail.name}</h1>
-              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px' }}>📍 {trail.location}</p>
+            <div style={{ minWidth: 0 }}>
+              <h1 style={{ margin: '0 0 4px 0', fontSize: 'clamp(20px, 5vw, 32px)', fontWeight: 700, wordBreak: 'break-word' }}>{trail.name}</h1>
+              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>📍 {trail.location}</p>
             </div>
           </div>
           {trail.price && (
             <div style={{ 
               background: 'rgba(255,255,255,0.95)', 
               color: '#2d5016', 
-              padding: '16px 24px', 
+              padding: '12px 16px', 
               borderRadius: '12px',
               textAlign: 'center',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
+              boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+              flexShrink: 0,
+              marginTop: '10px'
             }}>
-              <p style={{ margin: '0 0 4px 0', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', color: '#666' }}>Price per Person</p>
-              <p style={{ margin: 0, fontSize: '36px', fontWeight: 800, color: '#2d5016' }}>₨ {parseFloat(trail.price).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+              <p style={{ margin: '0 0 4px 0', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', color: '#666' }}>Price</p>
+              <p style={{ margin: 0, fontSize: 'clamp(20px, 4vw, 36px)', fontWeight: 800, color: '#2d5016' }}>₨ {parseFloat(trail.price).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
             </div>
           )}
         </div>
@@ -178,23 +180,23 @@ export default function TrailDetail() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         {/* Main Image */}
-        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: 'clamp(250px, 50vw, 400px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {isImage ? (
             <img 
               src={imageSrc} 
               alt={trail.name}
-              style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (
-            <div style={{ fontSize: '120px', textAlign: 'center' }}>
+            <div style={{ fontSize: 'clamp(80px, 20vw, 120px)', textAlign: 'center' }}>
               {trail.image || '⛰️'}
             </div>
           )}
         </div>
 
         {/* Content Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
-          <div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px', '@media (max-width: 768px)': { gridTemplateColumns: '1fr', gap: '24px' } }}>
+          <div style={{ '@media (max-width: 768px)': { order: 1 } }}>
             {/* Details Section */}
             <div style={{ marginBottom: '40px' }}>
               <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#2d5016', marginBottom: '20px' }}>Trail Details</h2>
@@ -250,7 +252,7 @@ export default function TrailDetail() {
           </div>
 
           {/* Sidebar */}
-          <div>
+          <div style={{ '@media (max-width: 768px)': { order: 2 } }}>
             <div style={{ 
               background: 'white', 
               padding: '24px', 

@@ -89,14 +89,14 @@ export default function DestinationDetail() {
     <div style={{ minHeight: '100vh', background: '#f8fafc' }}>
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', padding: '20px', position: 'relative' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <button onClick={() => navigate('/destinations')} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', minWidth: 0, flex: '1 1 auto' }}>
+            <button onClick={() => navigate('/destinations')} style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
               ← Back
             </button>
-            <div>
-              <h1 style={{ margin: '0 0 4px 0', fontSize: '32px', fontWeight: 700 }}>{destination.name}</h1>
-              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px' }}>📍 {destination.location}</p>
+            <div style={{ minWidth: 0 }}>
+              <h1 style={{ margin: '0 0 4px 0', fontSize: 'clamp(20px, 5vw, 32px)', fontWeight: 700, wordBreak: 'break-word' }}>{destination.name}</h1>
+              <p style={{ margin: 0, fontSize: '14px', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>📍 {destination.location}</p>
             </div>
           </div>
         </div>
@@ -104,15 +104,15 @@ export default function DestinationDetail() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         {/* Main Image */}
-        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', background: '#f0f4ff', minHeight: 'clamp(250px, 50vw, 400px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {images.length > 0 ? (
             <img 
               src={getImageUrl(images[selectedImage])} 
               alt={destination.name}
-              style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (
-            <div style={{ fontSize: '120px', textAlign: 'center' }}>
+            <div style={{ fontSize: 'clamp(80px, 20vw, 120px)', textAlign: 'center' }}>
               🏔️
             </div>
           )}
@@ -121,7 +121,7 @@ export default function DestinationDetail() {
         {/* Image Gallery Thumbnails */}
         {images.length > 1 && (
           <div style={{ marginBottom: '40px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '12px' }}>
               {images.map((img, idx) => (
                 <div 
                   key={idx}
@@ -134,7 +134,7 @@ export default function DestinationDetail() {
                     transition: 'all 0.3s'
                   }}
                 >
-                  <img src={getImageUrl(img)} alt={`Thumbnail ${idx + 1}`} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />
+                  <img src={getImageUrl(img)} alt={`Thumbnail ${idx + 1}`} style={{ width: '100%', height: '80px', objectFit: 'cover' }} />
                 </div>
               ))}
             </div>
@@ -142,7 +142,7 @@ export default function DestinationDetail() {
         )}
 
         {/* Content Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px', '@media (max-width: 768px)': { gridTemplateColumns: '1fr', gap: '24px' } }}>
           <div>
             {/* Details Section */}
             <div style={{ marginBottom: '40px' }}>

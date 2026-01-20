@@ -114,16 +114,16 @@ export default function ItineraryDetail() {
               <img 
                 src={itinerary.image} 
                 alt={itinerary.title}
-                style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
+                style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', height: 'clamp(200px, 50vw, 400px)' }}
               />
             </div>
           )}
 
-          <h1 style={{ fontSize: '36px', fontWeight: 700, color: '#2d5016', marginBottom: '16px' }}>
+          <h1 style={{ fontSize: 'clamp(24px, 5vw, 36px)', fontWeight: 700, color: '#2d5016', marginBottom: '16px' }}>
             {itinerary.title}
           </h1>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', marginBottom: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '16px', marginBottom: '30px' }}>
             <div style={{ background: '#f0f9ff', padding: '16px', borderRadius: '8px' }}>
               <p style={{ color: '#6b7280', fontSize: '12px', marginBottom: '4px' }}>Duration</p>
               <p style={{ fontSize: '18px', fontWeight: 600, color: '#2d5016' }}>{itinerary.duration}</p>
